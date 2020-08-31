@@ -3,7 +3,6 @@ import json
 import tabulate
 
 
-# PATH_TO_FILE = r'files/output_log.txt'
 PATH_TO_FILE = os.path.join(os.environ['USERPROFILE'], r'AppData\LocalLow\1CGS\Caliber\output_log.txt')
 
 # LINE_TO_FIND = r'Request https://ru-login.caliber.ru/v1/account/change_card complete:'
@@ -32,8 +31,8 @@ else:
     free_exp = good_json['freeXp']
 
     table_acc = tabulate.tabulate([
-        ['Ник', nickname], ['Уровень', level], ['Кредитов', credit], ['Золотишка', gold], ['Свободный опыт', free_exp]
-    ], tablefmt='pipe')
+        ['Уровень', level], ['Кредитов', credit], ['Золотишка', gold], ['Свободный опыт', free_exp]
+    ], headers=['Ник', nickname], tablefmt='pipe')
     print(table_acc)
 
     print('\n\tИнформация о проведенных сражениях:')
