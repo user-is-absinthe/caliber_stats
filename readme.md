@@ -4,7 +4,9 @@
 
 Перейти на [веб-версию](https://user-is-absinthe.github.io/caliber_stats/) этого репозитория, загрузить файл 
 
-`%UserProfile%\AppData\LocalLow\1CGS\Caliber\output_log.txt` (с % это переменная, просто подставь путь в проводник)
+`%UserProfile%\AppData\LocalLow\1CGS\Caliber\output_log.txt` (с % это переменная, просто подставь путь вместо названия файла)
+
+![upload](https://github.com/user-is-absinthe/caliber_stats/blob/master/files/upload.png)
 
 ### Ожидаемый результат:
 
