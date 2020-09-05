@@ -1,69 +1,247 @@
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Калибр. Проверка личной статистики.</title>
 
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-        /*table {*/
-        /*    width:100%;*/
-        /*}*/
-    </style>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            /*table {*/
+            /*    width:100%;*/
+            /*}*/
 
-    <title>Проверь свою статистику Калибра</title>
+            body{
+                /*font-family: Helvetica;*/
+                -webkit-font-smoothing: antialiased;
+                background: rgba( 71, 147, 227, 1);
+            }
+            h2{
+                text-align: center;
+                font-size: 18px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: white;
+                padding: 30px 0;
+            }
 
-</head>
+            /* Table Styles */
 
-<h4>Версия 0.0.0.00.0.1 alpha</h4>
+            .table-wrapper{
+                margin: 10px 70px 70px;
+                box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+            }
 
-Нужен этот файл:
-<br>
-%UserProfile%\AppData\LocalLow\1CGS\Caliber\output_log.txt
+            .fl-table {
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: normal;
+                border: none;
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 100%;
+                white-space: nowrap;
+                background-color: white;
+            }
 
-<br>
-<br>
-Можно не волноваться, данные не убегут, обработка происходит исключительно локально, в браузере. <br>
-Собственно, по этой прчине, отсутствует единая база и нет возможности сравнить свой результат с другими игроками.
-<br>
+            .fl-table td, .fl-table th {
+                text-align: center;
+                padding: 8px;
+            }
 
-<br>
-<br>
+            .fl-table td {
+                border-right: 1px solid #f8f8f8;
+                font-size: 18px;
+            }
 
-<input type="file" id="file-input" />
-<pre id="file-content"></pre>
+            .fl-table thead th {
+                color: #ffffff;
+                background: #4FC3A1;
+            }
 
-<br>
-Информация об аккаунте:
-<table id="account_info">
-</table>
 
-<br>
-Информация о проведенных сражениях:
-<table id="battle_info">
-</table>
+            .fl-table thead th:nth-child(odd) {
+                color: #ffffff;
+                background: #324960;
+            }
 
-<h6>Когда-нибудь здесь будет красота. Но не сегодня.</h6>
+            .fl-table tr:nth-child(even) {
+                background: #F8F8F8;
+            }
 
-<script>
+            /* Responsive */
+
+            @media (max-width: 767px) {
+                .fl-table {
+                    display: block;
+                    width: 100%;
+                }
+
+                .table-wrapper:before {
+                    content: "Scroll horizontally >";
+                    display: block;
+                    text-align: right;
+                    font-size: 11px;
+                    color: white;
+                    padding: 0 0 10px;
+                }
+
+                .fl-table thead, .fl-table tbody, .fl-table thead th {
+                    display: block;
+                }
+
+                .fl-table thead th:last-child {
+                    border-bottom: none;
+                }
+
+                .fl-table thead {
+                    float: left;
+                }
+
+                .fl-table tbody {
+                    width: auto;
+                    position: relative;
+                    overflow-x: auto;
+                }
+
+                .fl-table td, .fl-table th {
+                    padding: 20px .625em .625em .625em;
+                    height: 60px;
+                    vertical-align: middle;
+                    box-sizing: border-box;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    width: 120px;
+                    font-size: 13px;
+                    text-overflow: ellipsis;
+                }
+
+                .fl-table thead th {
+                    text-align: left;
+                    border-bottom: 1px solid #f7f7f9;
+                }
+
+                .fl-table tbody tr {
+                    display: table-cell;
+                }
+
+                .fl-table tbody tr:nth-child(odd) {
+                    background: none;
+                }
+
+                .fl-table tr:nth-child(even) {
+                    background: transparent;
+                }
+
+                .fl-table tr td:nth-child(odd) {
+                    background: #F8F8F8;
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                .fl-table tr td:nth-child(even) {
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                .fl-table tbody td {
+                    display: block;
+                    text-align: center;
+                }
+            }
+        </style>
+
+        <title>Проверь свою статистику Калибра</title>
+
+    </head>
+    <body>
+        <h4>Версия 0.5 alpha</h4>
+
+        <label for="copied_path">
+            Нужен этот файл (можно просто скопировать путь и вставить в место для названия файла, см. картинку):
+            <br>
+        </label>
+        <input type="text" value="%UserProfile%\AppData\LocalLow\1CGS\Caliber\output_log.txt" id="copied_path" size="50">
+        <br>
+        <button onclick="copy_path()">Нажать чтобы скопировать путь до файла</button>
+
+        <br>
+        <br>
+        Можно не волноваться, данные не убегут, обработка происходит исключительно локально, в браузере. <br>
+        Собственно, по этой прчине, отсутствует единая база и нет возможности сравнить свой результат с другими игроками.
+        <br>
+
+        <br>
+        <br>
+
+        <input type="file" id="file-input" />
+        <pre id="file-content"></pre>
+
+        <details>
+            <summary>Пример</summary>
+            <img src="files/upload.png" alt="Картнка для загрузки" width="60%" height="60%">
+        </details>
+
+        <br>
+        <div align="center">
+        <table id="account_info" class="fl-table">
+        </table>
+
+        <br>
+        <table id="battle_info" class="fl-table">
+        </table>
+        </div>
+
+        <h4>
+            Исходники можно посмотреть <a href="https://github.com/user-is-absinthe/caliber_stats">тут</a>.
+            Что-либо предложить по функционалу - <a href="http://forum.caliber.ru/">тут</a>.
+        </h4>
+
+        <h6>Когда-нибудь здесь будет красота. Но не сегодня.</h6>
+
+        <div>
+            <div style="width: 50%; margin: 0 auto; text-align: center;">
+                <h6>Автор - <a href="http://forum.caliber.ru/index.php?/user/meow-koteq-1612008/">meow_koteq</a></h6>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+    function copy_path() {
+        /* Get the text field */
+        let copyText = document.getElementById("copied_path");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        // alert("Copied the text: " + copyText.value);
+    }
+
+
     function readSingleFile(e) {
-        var file = e.target.files[0];
+        let file = e.target.files[0];
         if (!file) {
             return;
         }
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function(e) {
-            var contents = e.target.result;
+            let contents = e.target.result;
             // displayContents(contents);
             find_json(contents);
         };
         reader.readAsText(file);
     }
 
+
     function displayContents(contents) {
-        var element = document.getElementById('file-content');
+        let element = document.getElementById('file-content');
         element.textContent = contents;
     }
+
 
     function find_json(contents) {
         let find_line = "Request https://ru-login.caliber.ru/v1/account/unmark_entity complete: ";
@@ -84,14 +262,6 @@
         let level = good_json['level'];
         let free_exp = good_json['freeXp'];
 
-        // let account_info = "".concat(
-        //     "Имя аккаунта: ", nickname,
-        //     "\nКоличество кредитов: ", credit,
-        //     "\nКоличество золота: ", gold,
-        //     "\nУровень аккаунта: ", level,
-        //     "\nСвободного опыта: ", free_exp
-        // );
-
         let table_acc_info = [
             ["Имя аккаунта", nickname],
             ["Количество кредитов", credit],
@@ -99,8 +269,7 @@
             ["Уровень аккаунта", level],
             ["Свободного опыта", free_exp]
         ];
-        add_data_to_table("account_info", table_acc_info);
-
+        add_data_to_table("account_info", "Информация аккаунта", table_acc_info);
 
         let training = good_json['matchCount']['polygon'];
         let pve = good_json['matchCount']['pve'];
@@ -127,16 +296,18 @@
             ["Побед", 0, win_pve, win_pve_hard, win_pvp, win_hack_net, win_pvp_pve],
             ["% побед", 0, percent_pve, percent_pve_hard, percent_pvp, percent_hack_net, percent_pvp_pve],
         ];
-        add_data_to_table("battle_info", table_battle_info)
+        add_data_to_table("battle_info", "Информация о проведенных сражениях", table_battle_info)
         // displayContents(table_acc_info);
-        // console.log(start_line, end_line)
     }
 
 
-    function add_data_to_table(table_name, data) {
-        // console.log(data);
+    function add_data_to_table(table_name, table_head, data) {
         let table = document.getElementById(table_name);
-
+        let head_row = table.createTHead();
+        let head = head_row.insertRow();
+        let head_cell = head.insertCell();
+        head_cell.colSpan = data[0].length;
+        head_cell.innerHTML = table_head;
         for (let index_line in data) {
             let row = table.insertRow(-1);
             for (let cell_index in data[index_line]) {
@@ -146,6 +317,8 @@
         }
     }
 
+
     document.getElementById('file-input')
         .addEventListener('change', readSingleFile, false);
 </script>
+</html>
