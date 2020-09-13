@@ -244,16 +244,24 @@
 
 
     function find_json(contents) {
-        // let find_line = "Request https://ru-login.caliber.ru/v1/account/unmark_entity complete: ";
-        let find_line = "Request https://ru-login.caliber.ru/v1/account/update complete: ";
-        let start_line = contents.lastIndexOf(find_line);
+        let find_line = ",\"money\":{\"values\":{\"sc\":";
+        let this_line = contents.lastIndexOf(find_line);
+        let all_open = [...contents.matchAll("{")];
         let all_sep = [...contents.matchAll("\n")];
 
         let end_line = all_sep.filter(function (index) {
-            return index["index"] > start_line;
+            return index["index"] > this_line;
         }).slice(0)[0]["index"];
 
-        let good_json_string = contents.substring(start_line + find_line.length, end_line);
+        let end_prev_line = all_sep.reverse().filter(function (index) {
+            return index["index"] < this_line;
+        }).slice(0)[0]["index"];
+
+        let start_line = all_open.filter(function (index) {
+            return index["index"] > end_prev_line;
+        }).slice(0)[0]["index"];
+
+        let good_json_string = contents.substring(start_line, end_line);
 
         let good_json = JSON.parse(good_json_string);
 
