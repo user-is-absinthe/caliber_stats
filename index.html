@@ -244,7 +244,8 @@
 
 
     function find_json(contents) {
-        let find_line = "Request https://ru-login.caliber.ru/v1/account/unmark_entity complete: ";
+        // let find_line = "Request https://ru-login.caliber.ru/v1/account/unmark_entity complete: ";
+        let find_line = "Request https://ru-login.caliber.ru/v1/account/update complete: ";
         let start_line = contents.lastIndexOf(find_line);
         let all_sep = [...contents.matchAll("\n")];
 
