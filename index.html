@@ -269,7 +269,7 @@
         let credit = good_json['money']['values']['sc'];
         let gold = good_json['money']['values']['hc'];
         let level = good_json['level'];
-        let free_exp = good_json['freeXp'];
+        let free_exp = good_json['money']['values']['free_xp'];
 
         let table_acc_info = [
             ["Имя аккаунта", nickname],
@@ -286,24 +286,27 @@
         let pvp = good_json['matchCount']['pvp'];
         let hack_net = good_json['matchCount']['hacking'];
         let pvp_pve = good_json['matchCount']['pvpve'];
+        let ranked = good_json['matchCount']['pvpranked'];
 
         let win_pve = good_json['matchesWon']['pve'];
         let win_pve_hard = good_json['matchesWon']['pvehard'];
         let win_pvp = good_json['matchesWon']['pvp'];
         let win_hack_net = good_json['matchesWon']['hacking'];
         let win_pvp_pve = good_json['matchesWon']['pvpve'];
+        let win_ranked = good_json['matchesWon']['pvpranked'];
 
         let percent_pve = Math.round(win_pve / pve * 100 * 100) / 100;
         let percent_pve_hard = Math.round(win_pve_hard / pve_hard * 100 * 100) / 100;
         let percent_pvp = Math.round(win_pvp / pvp * 100 * 100) / 100;
         let percent_hack_net = Math.round(win_hack_net / hack_net * 100 * 100) / 100;
         let percent_pvp_pve = Math.round(win_pvp_pve / pvp_pve * 100 * 100) / 100;
+        let percent_ranked = Math.round(win_ranked / ranked * 100 * 100) / 100;
 
         let table_battle_info = [
-            ["", "Тренировка", "PvE", "Спецоперация", "PvP", "Взлом", "Фронт"],
-            ["Всего игр", training, pve, pve_hard, pvp, hack_net, pvp_pve],
-            ["Побед", 0, win_pve, win_pve_hard, win_pvp, win_hack_net, win_pvp_pve],
-            ["% побед", 0, percent_pve, percent_pve_hard, percent_pvp, percent_hack_net, percent_pvp_pve],
+            ["", "Тренировка", "PvE", "Спецоперация", "PvP", "Взлом", "Фронт", "Ранг. бои"],
+            ["Всего игр", training, pve, pve_hard, pvp, hack_net, pvp_pve, ranked],
+            ["Побед", 0, win_pve, win_pve_hard, win_pvp, win_hack_net, win_pvp_pve, win_ranked],
+            ["% побед", 0, percent_pve, percent_pve_hard, percent_pvp, percent_hack_net, percent_pvp_pve, percent_ranked],
         ];
         add_data_to_table("battle_info", "Информация о проведенных сражениях", table_battle_info)
         // displayContents(table_acc_info);
